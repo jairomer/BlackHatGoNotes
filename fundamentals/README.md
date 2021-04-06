@@ -75,11 +75,7 @@ fmt.Println(*ptr)   // Print value stored at ptr memory address.
 
 // A struct defines new data types from other ones.
 
-<<<<<<< HEAD
-type Persons struct {   // Define a new struct.
-=======
 type Person struct {   // Define a new struct.
->>>>>>> Finished chapter on fundamentals.
     Name string
     Age int
 }
@@ -108,13 +104,6 @@ type Friend interface {
 func Greet (f Friend) {
     f.SayHello()
 }
-<<<<<<< HEAD
-
-```
-
-
-
-=======
 ```
 
 **Control structures**
@@ -270,4 +259,3 @@ func main() {
     json.Unmarshal(b, &f)
 }
 ```
->>>>>>> Finished chapter on fundamentals.
