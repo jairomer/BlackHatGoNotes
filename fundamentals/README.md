@@ -75,7 +75,11 @@ fmt.Println(*ptr)   // Print value stored at ptr memory address.
 
 // A struct defines new data types from other ones.
 
+<<<<<<< HEAD
 type Persons struct {   // Define a new struct.
+=======
+type Person struct {   // Define a new struct.
+>>>>>>> Finished chapter on fundamentals.
     Name string
     Age int
 }
@@ -104,8 +108,166 @@ type Friend interface {
 func Greet (f Friend) {
     f.SayHello()
 }
+<<<<<<< HEAD
 
 ```
 
 
 
+=======
+```
+
+**Control structures**
+
+_if-else_
+```
+// No wrapping on conditional check.
+// All blocks require braces.
+if x == 1 {
+    fmt.Println("X is equal to 1")
+} else {
+    fmt.Println("X is not equal to 1")
+}
+```
+
+If you need conditions with more than two choices. Use switch.
+
+However, be careful when using switch with types that can be extended.
+If this is the case, code reusability can be improved using interfaces and the double dispatch pattern.
+
+Break statements are not required. Execution breaks automatically at the end of the matching case.
+
+We can also get the type of a variable using `<interface_name>.(type)`.
+However, using this tool is considered an antipattern is SWE circles. Use interface inheritance instead.
+
+_switch_
+```
+switch x {
+    case "foo":
+        fmt.Println("Found foo")
+    case "bar":
+        fmt.Println("Found bar")
+    default:
+        fmt.Println("Default case")
+}
+```
+
+The only control structure in Go to implement loops is the for-loop.
+
+_for loop_
+```
+for i := 0; i < 10; i++ {
+    fmt.Println(i)
+}
+```
+
+We will need a functionality to loop over collections.
+We will use iterators for that.
+
+_for loop with iterators_
+```
+collection := []int{2, 4, 8, 16}
+
+// 'range()' will yield the index and the value of the item.
+// This way, we can either read the value, or modify it using the
+// index and the collection selection functionality.
+for idx, val := range collection {
+    fmt.Println(idx, val)
+}
+
+for idx, _ := range collection {
+    fmt.Println(idx)
+}
+
+
+for _, val := range collection {
+    fmt.Println(val)
+}
+```
+
+**Concurrency**
+
+- Go's concurrency model is based on something called _goroutines_.
+- A goroutine is a function or method that can run simultaneously.
+- A goroutine is also considered a _ligthweight thread_ because its creation cost is minimal.
+
+
+_coroutine_
+```
+
+// Function to be executed concurrently.
+func f() {
+    fmt.Println("f function")
+}
+
+func main() {
+    go f()  // Execute f
+
+    // We need to keep the main thread alive until f() has finished
+    // in order to see its results.
+    time.Sleep(1 * time.Second)
+    fmt.Println("main function")
+}
+```
+
+**Error Handling**
+
+- Go does not have _try-catchs_.
+- Minimalistic approach, a function fails when it fails and must be handled at the point it occurs.
+
+```
+// Anything that implements this interface is an error.
+// Rememeber that methods with Uppercase are packet-public.
+type error interface {
+    Error() string
+}
+
+// You can use any data type that implements such a method
+// to implement custom errors.
+type MyError string
+func (e MyError) Error() string {
+    return string(e)
+}
+
+func foo() error {
+    return errors.New("Some Error Occurred")
+}
+
+func main() {
+    // This is a common pattern to handling errors.
+    // Notice this is similar to the way things are done in
+    // POSIX C.
+    if err := foo(); err != nill {
+        // Handle the error
+    }
+}
+```
+
+
+
+**Handling Structured Data**
+- Common encodings: JSON or XML.
+- Go contains standard packages for data encoding: `encoding/json` and `encoding/xml`.
+
+_Example_
+```
+type Foo struct {
+    Bar string
+    Baz string
+}
+
+// This example code is ignoring best practices for 
+// the sake of simplicity.
+func main() {
+    // First define the struct.
+    f := Foo{"Joe Junior", "Hello Shabado"}
+
+    // Pass the struct instance to the marshall function.
+    // This will return a byte slice (and an error).
+    b, _ := json.Marshal(f)
+    fmt.Println(string(b))
+
+    json.Unmarshal(b, &f)
+}
+```
+>>>>>>> Finished chapter on fundamentals.
